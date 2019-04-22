@@ -1,0 +1,58 @@
+package com.tahn.novelgui.CustomAdapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.tahn.novelgui.DataObject.Novel;
+import com.tahn.novelgui.R;
+
+import java.util.ArrayList;
+
+public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder> {
+
+    private Context context;
+    private ArrayList<Novel> novelArrayList;
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+        public TextView txtViewName;
+        public TextView txtRate;
+        public ImageView imgNovel;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            txtViewName = itemView.findViewById(R.id.title);
+            txtRate = itemView.findViewById(R.id.userrating);
+            imgNovel = itemView.findViewById(R.id.thumbnail);
+        }
+    }
+
+    public NovelAdapter(Context context, ArrayList<Novel> novelArrayList){
+        this.context = context;
+        this.novelArrayList = novelArrayList;
+    }
+
+    @Override
+    public NovelAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        View itemView = layoutInflater.inflate(R.layout.novel_card, viewGroup, false);
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(NovelAdapter.MyViewHolder myViewHolder, int i) {
+        myViewHolder.txtViewName.setText(novelArrayList.get(i).getName());
+        myViewHolder.txtRate.setText("Rate: " + novelArrayList.get(i).getRate());
+        myViewHolder.imgNovel.setImageResource(novelArrayList.get(i).getImg());
+    }
+
+    @Override
+    public int getItemCount() {
+        return novelArrayList.size();
+    }
+
+}
