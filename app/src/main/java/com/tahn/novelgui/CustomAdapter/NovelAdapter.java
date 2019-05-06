@@ -2,23 +2,27 @@ package com.tahn.novelgui.CustomAdapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tahn.novelgui.DataObject.Novel;
+import com.tahn.novelgui.MainActivity;
 import com.tahn.novelgui.R;
 
 import java.util.ArrayList;
 
-public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder> {
+public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder>{
 
     private Context context;
     private ArrayList<Novel> novelArrayList;
+    private View.OnClickListener mOnItemClickListener;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView txtViewName;
         public TextView txtRate;
         public ImageView imgNovel;
@@ -28,8 +32,15 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
             txtViewName = itemView.findViewById(R.id.title);
             txtRate = itemView.findViewById(R.id.userrating);
             imgNovel = itemView.findViewById(R.id.thumbnail);
+
+            itemView.setTag(this);
+            itemView.setOnClickListener(mOnItemClickListener);
         }
     }
+    public void setOnItemClickListener(View.OnClickListener itemClickListener) {
+        mOnItemClickListener = itemClickListener;
+    }
+
 
     public NovelAdapter(Context context, ArrayList<Novel> novelArrayList){
         this.context = context;
@@ -54,5 +65,4 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
     public int getItemCount() {
         return novelArrayList.size();
     }
-
 }

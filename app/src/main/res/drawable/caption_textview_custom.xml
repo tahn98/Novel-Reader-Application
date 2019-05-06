@@ -9,7 +9,7 @@
         </shape>
     </item>
 
-    <item android:left="14dp">
+    <item android:left="7dp">
         <shape android:shape="rectangle">
             <gradient
                 android:angle="45"

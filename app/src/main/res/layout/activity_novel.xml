@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NovelActivity">
+
+    <FrameLayout
+        android:id="@+id/background_top"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/back_ground_novel_top"></FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/imgNovel"
+        android:layout_centerHorizontal="true"
+        android:layout_width="120dp"
+        android:layout_height="200dp"
+        android:src="@drawable/endgame" />
+
+    <TextView
+        android:id="@+id/txtNovelName"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgNovel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        android:text="END GAME" />
+
+    <TextView
+        android:fontFamily="sans-serif-medium"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNovelName"
+        android:layout_alignTop="@+id/txtNovelName"
+        android:layout_marginTop="50dp"
+        android:text="Author Name"
+        android:textColor="#ffffff" />
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/imgNovel"
+        android:layout_marginTop="305dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Description goes here. If the text is too long ..."
+            android:id="@+id/txtDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"></RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
