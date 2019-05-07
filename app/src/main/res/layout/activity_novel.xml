@@ -68,6 +68,67 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"></RelativeLayout>
+            android:layout_height="80dp">
+
+            <TextView
+                android:textColor="#BD3434"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:id="@+id/txtRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="20dp"
+                android:text="4" />
+
+            <TextView
+                android:fontFamily="sans-serif-medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="59dp"
+                android:layout_marginBottom="0dp"
+                android:text="RATING" />
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="75dp"
+                android:text="5-16"
+                android:textColor="#BD3434"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="85dp"
+                android:text="DATE" />
+        </RelativeLayout>
+
+        <TextView
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="10dp"
+            android:text="Chapters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/lvChapter"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
     </LinearLayout>
 </RelativeLayout>
