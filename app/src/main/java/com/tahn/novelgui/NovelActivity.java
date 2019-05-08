@@ -13,7 +13,5 @@ public class NovelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novel);
 
-        lvChapter = findViewById(R.id.lvChapter);
-
     }
 }

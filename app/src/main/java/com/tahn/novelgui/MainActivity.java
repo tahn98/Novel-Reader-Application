@@ -2,6 +2,7 @@ package com.tahn.novelgui;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
             int position = viewHolder.getAdapterPosition();
             switch (position){
                 case 0:
-                    Toast.makeText(MainActivity.this, "0", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MainActivity.this, NovelActivity.class);
+                    startActivity(intent);
                     break;
                 case 1:
                     Toast.makeText(MainActivity.this, "1", Toast.LENGTH_LONG).show();
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +68,13 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.bookMark:
-                                Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
-                                startActivity(intent);
+                                Intent intentBookmark = new Intent(MainActivity.this, BookmarkActivity.class);
+                                startActivity(intentBookmark);
+                                break;
+                            case R.id.search:
+                                Intent intentSearch = new Intent(MainActivity.this, SearchActivity.class);
+                                startActivity(intentSearch);
+                                break;
                         }
                         return true;
                     }
@@ -73,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         addRecycleViewController();
 
@@ -98,5 +110,15 @@ public class MainActivity extends AppCompatActivity {
 
         firstRecyclerView.setLayoutManager(firstManager);
         secondRecycleView.setLayoutManager(secondManager);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
