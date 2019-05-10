@@ -1,6 +1,9 @@
 package com.tahn.novelgui;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,12 +22,32 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.tahn.novelgui.CustomAdapter.NovelAdapter;
 import com.tahn.novelgui.DataObject.Novel;
+import com.tahn.novelgui.Retrofit_Config.APIUtils;
+import com.tahn.novelgui.Retrofit_Config.BookRetrofit;
+import com.tahn.novelgui.Retrofit_Config.DataClient;
+
+import com.tahn.novelgui.Volley_config.Book_Volley;
+import com.tahn.novelgui.Volley_config.RequestHandler;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 import com.takusemba.multisnaprecyclerview.OnSnapListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GetSomeThing();
         drawerLayout = findViewById(R.id.drawer_layout);
 
         navigationView = findViewById(R.id.nav_view);
@@ -87,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         addRecycleViewController();
+        //////
+
 
         novelArrayList.add(new Novel("End Game", R.drawable.endgame, "5"));
         novelArrayList.add(new Novel("Infinity War", R.drawable.infinity, "5"));
@@ -99,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         secondRecycleView.setAdapter(novelAdapterUpdate);
 
         novelAdapter.setOnItemClickListener(onItemClickListener);
+
+        /////////////
     }
 
     public void addRecycleViewController(){
@@ -120,5 +148,52 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void GetSomeThing(){
+        String url = "http://192.168.56.1:8080/sql_server/v1/getAllUserInfor.php";
+        final ArrayList<Book_Volley> Book_arrayList = new ArrayList<>();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject object = response.getJSONObject(i);
+                                Book_arrayList.add(
+                                        new Book_Volley(object.getInt("id"),
+                                                object.getString("name"),
+                                                object.getString("description"),
+                                                object.getString("author_name"),
+                                                object.getString("cover"))
+                                );
+                                Toast.makeText(MainActivity.this, Book_arrayList.get(0).getName(), Toast.LENGTH_LONG).show();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "FALSE" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+        );
+        RequestHandler.getInstance(this).addToRequestQueue(jsonArrayRequest);
+    }
+    public String getRealPathFromURI (Uri contentUri) {
+        /* lấy địa chỉ thật thừ điện thoại*/
+        String path = null;
+        String[] proj = { MediaStore.MediaColumns.DATA };
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
     }
 }
