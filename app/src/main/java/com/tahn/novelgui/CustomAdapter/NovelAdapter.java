@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.tahn.novelgui.DataObject.Novel;
 import com.tahn.novelgui.MainActivity;
 import com.tahn.novelgui.R;
@@ -58,7 +59,13 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
     public void onBindViewHolder(NovelAdapter.MyViewHolder myViewHolder, int i) {
         myViewHolder.txtViewName.setText(novelArrayList.get(i).getName());
         myViewHolder.txtRate.setText("Rate: " + novelArrayList.get(i).getRate());
-        myViewHolder.imgNovel.setImageResource(novelArrayList.get(i).getImg());
+
+        Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/1.jpg")
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.drawable.endgame)
+                .into(myViewHolder.imgNovel);
+
+        //myViewHolder.imgNovel.setImageResource(novelArrayList.get(i).getImg());
     }
 
     @Override

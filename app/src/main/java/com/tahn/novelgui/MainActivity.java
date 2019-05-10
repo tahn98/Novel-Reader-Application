@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Novel> novelArrayList = new ArrayList<>();
     ArrayList<Novel> novelArrayListUpdate = new ArrayList<>();
 
+    ArrayList<Book_Volley> Book_arrayList = new ArrayList<>();
     //event click on recycle view
     private View.OnClickListener onItemClickListener = new View.OnClickListener() {
         @Override
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void GetSomeThing(){
         String url = "http://192.168.56.1:8080/sql_server/v1/getAllUserInfor.php";
-        final ArrayList<Book_Volley> Book_arrayList = new ArrayList<>();
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
