@@ -28,8 +28,8 @@ public class BookmarkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bookmark);
 
         novelArrayList = new ArrayList<>();
-        novelArrayList.add(new Novel("Avengers", "The End Game with Thanos", "26/04/2019", R.drawable.endgame));
-
+        //novelArrayList.add(new Novel("Avengers", "The End Game with Thanos", "26/04/2019", R.drawable.endgame));
+        novelArrayList.add(new Novel(1,"End Game", "", "5","",""));
         novelListView = findViewById(R.id.lvBookMark);
         NovelBookmarkAdapter novelBookmarkAdapter = new NovelBookmarkAdapter(BookmarkActivity.this, novelArrayList);
         novelListView.setAdapter(novelBookmarkAdapter);

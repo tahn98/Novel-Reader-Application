@@ -7,6 +7,18 @@ public class Book_Volley {
     String author_name;
     String cover; // link image
 
+    String rating;
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+
+
     public int getId() {
         return id;
     }
@@ -47,16 +59,7 @@ public class Book_Volley {
         this.cover = cover;
     }
 
-    public Book_Volley(int id, String name, String description, String author_name, String cover) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.author_name = author_name;
-        this.cover = cover;
-    }
-
     @Override
-
     public String toString() {
         return "Book_Volley{" +
                 "id=" + id +
@@ -64,6 +67,7 @@ public class Book_Volley {
                 ", description='" + description + '\'' +
                 ", author_name='" + author_name + '\'' +
                 ", cover='" + cover + '\'' +
+                ", rating='" + rating + '\'' +
                 '}';
     }
 }

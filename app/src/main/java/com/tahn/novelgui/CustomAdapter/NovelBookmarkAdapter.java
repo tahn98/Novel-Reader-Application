@@ -51,10 +51,11 @@ public class NovelBookmarkAdapter extends BaseAdapter {
         ImageView imgView = convertView.findViewById(R.id.img_picNovel);
 
         txtName.setText(novels.get(position).getName());
-        txtDesc.setText(novels.get(position).getDesc());
-        txtTime.setText(novels.get(position).getDate());
-        imgView.setImageResource(novels.get(position).getImg());
+        txtDesc.setText(novels.get(position).getDescription());
+        txtTime.setText(novels.get(position).getDateTime());
+        //imgView.setImageResource(novels.get(position).getCover());
 
+        // Picasso processing
         return convertView;
     }
 

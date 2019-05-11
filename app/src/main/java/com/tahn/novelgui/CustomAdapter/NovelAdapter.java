@@ -58,7 +58,7 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(NovelAdapter.MyViewHolder myViewHolder, int i) {
         myViewHolder.txtViewName.setText(novelArrayList.get(i).getName());
-        myViewHolder.txtRate.setText("Rate: " + novelArrayList.get(i).getRate());
+        myViewHolder.txtRate.setText("Rate: " + novelArrayList.get(i).getRating());
 
         Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/1.jpg")
                 .placeholder(R.mipmap.ic_launcher)

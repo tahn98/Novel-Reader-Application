@@ -54,10 +54,11 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     private DrawerLayout drawerLayout;
     MultiSnapRecyclerView firstRecyclerView, secondRecycleView;
-    ArrayList<Novel> novelArrayList = new ArrayList<>();
-    ArrayList<Novel> novelArrayListUpdate = new ArrayList<>();
+    public static ArrayList<Novel> novelArrayList = new ArrayList<>();
+    public static ArrayList<Novel> novelArrayListUpdate = new ArrayList<>();
 
-    ArrayList<Book_Volley> Book_arrayList = new ArrayList<>();
+
+    //public static ArrayList<Book_Volley> Book_arrayList = new ArrayList<>();
     //event click on recycle view
     private View.OnClickListener onItemClickListener = new View.OnClickListener() {
         @Override
@@ -115,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
         //////
 
 
-        novelArrayList.add(new Novel("End Game", R.drawable.endgame, "5"));
-        novelArrayList.add(new Novel("Infinity War", R.drawable.infinity, "5"));
-        novelArrayListUpdate.add(new Novel("Sword Art Online", R.drawable.sword, "5"));
+//        novelArrayList.add(new Novel(1,"End Game", "", "5","",""));
+//        novelArrayList.add(new Novel(1,"Infinity War", "", "5","",""));
+        novelArrayListUpdate.add(new Novel(1,"Sword Art Online", "", "5","",""));
 
         NovelAdapter novelAdapter = new NovelAdapter(getApplicationContext(), novelArrayList);
         NovelAdapter novelAdapterUpdate = new NovelAdapter(getApplicationContext(), novelArrayListUpdate);
@@ -159,17 +160,22 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length(); i++) {
+                        int k = 0;
+                        if (response.length() > 5) k = 5;
+                        else k = response.length();
+
+
+                        for (int i = 0; i < k; i++) {
                             try {
                                 JSONObject object = response.getJSONObject(i);
-                                Book_arrayList.add(
-                                        new Book_Volley(object.getInt("id"),
+                                novelArrayList.add(
+                                        new Novel(object.getInt("id"),
                                                 object.getString("name"),
                                                 object.getString("description"),
                                                 object.getString("author_name"),
-                                                object.getString("cover"))
+                                                object.getString("cover"),"0")
                                 );
-                                Toast.makeText(MainActivity.this, Book_arrayList.get(0).getName(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(MainActivity.this, novelArrayList.get(i).getName(), Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

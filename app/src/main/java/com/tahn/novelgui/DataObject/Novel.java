@@ -1,47 +1,47 @@
 package com.tahn.novelgui.DataObject;
 
 public class Novel {
-    private String name;
-    private int img;
-    private String rate;
-    private String desc;
-    private String date;
+    int id;
+    String name;
+    String description;
+    String author_name;
+    String cover; // link image
 
-    public String getRate() {
-        return rate;
+    String rating;
+
+    String dateTime;
+
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public String getDesc() {
-        return desc;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public String getRating() {
+        return rating;
     }
 
-    public String getDate() {
-        return date;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setRate(String rate) {
-        this.rate = rate;
-    }
-
-    public Novel(String name, String desc, String date, int img){
+    public Novel(int id, String name, String description, String author_name, String cover, String rating) {
+        this.id = id;
         this.name = name;
-        this.desc = desc;
-        this.date = date;
-        this.img = img;
+        this.description = description;
+        this.author_name = author_name;
+        this.cover = cover;
+        this.rating = rating;
     }
 
-    public Novel(String name, int img, String rate) {
-        this.name = name;
-        this.img = img;
-        this.rate = rate;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,11 +52,39 @@ public class Novel {
         this.name = name;
     }
 
-    public int getImg() {
-        return img;
+    public String getDescription() {
+        return description;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    @Override
+    public String toString() {
+        return "Novel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", author_name='" + author_name + '\'' +
+                ", cover='" + cover + '\'' +
+                ", rating='" + rating + '\'' +
+                '}';
     }
 }
