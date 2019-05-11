@@ -1,5 +1,6 @@
 package com.tahn.novelgui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import com.tahn.novelgui.Retrofit_Config.DataClient;
 
 import com.tahn.novelgui.Volley_config.Book_Volley;
 import com.tahn.novelgui.Volley_config.RequestHandler;
+import com.tahn.novelgui.Volley_config.Volley_Constant;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 import com.takusemba.multisnaprecyclerview.OnSnapListener;
 
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     MultiSnapRecyclerView firstRecyclerView, secondRecycleView;
     public static ArrayList<Novel> novelArrayList = new ArrayList<>();
     public static ArrayList<Novel> novelArrayListUpdate = new ArrayList<>();
+    public static final String key = "send0";
 
 
     //public static ArrayList<Book_Volley> Book_arrayList = new ArrayList<>();
@@ -65,26 +68,48 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
             int position = viewHolder.getAdapterPosition();
-            switch (position){
-                case 0:
-                    Intent intent = new Intent(MainActivity.this, NovelActivity.class);
-                    startActivity(intent);
-                    break;
-                case 1:
-                    Toast.makeText(MainActivity.this, "1", Toast.LENGTH_LONG).show();
-                    break;
-            }
+            goToActivity(position);
+//            switch (position){
+//                case 0:
+////                    Intent intent = new Intent(MainActivity.this, NovelActivity.class);
+////                    startActivity(intent);
+////                    break;
+//                    ;
+//                    break;
+//                case 1:
+//                    goToActivity(position);
+//                    Toast.makeText(MainActivity.this, "1", Toast.LENGTH_LONG).show();
+//                    break;
+//                case 2:
+//                    goToActivity(position);
+//                    break;
+//                case 3:
+//
+//            }
         }
     };
 
 
+//    @Override
+//    protected void onResume() {
+//        novelArrayList.clear();
+//        GetSomeThing();
+//        super.onResume();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        novelArrayList.clear();
+//
+//        super.onStop();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GetSomeThing();
+
         drawerLayout = findViewById(R.id.drawer_layout);
 
         navigationView = findViewById(R.id.nav_view);
@@ -94,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.bookMark:
-                                Intent intentBookmark = new Intent(MainActivity.this, BookmarkActivity.class);
+                                Intent intentBookmark = new Intent(MainActivity.this,BookmarkActivity.class);
                                 startActivity(intentBookmark);
                                 break;
                             case R.id.search:
@@ -116,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
         //////
 
 
-//        novelArrayList.add(new Novel(1,"End Game", "", "5","",""));
+        GetSomeThing();
+
+        //novelArrayList.add(new Novel(1,"End Game", "", "5","",""));
 //        novelArrayList.add(new Novel(1,"Infinity War", "", "5","",""));
         novelArrayListUpdate.add(new Novel(1,"Sword Art Online", "", "5","",""));
 
@@ -154,27 +181,46 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void GetSomeThing(){
-        String url = "http://192.168.56.1:8080/sql_server/v1/getAllUserInfor.php";
+//        novelArrayList.add(new Novel(-1,"End Game", "", "5","",""));
+        String url = Volley_Constant.Url_Base+ "getAllBookInfor.php";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        int k = 0;
+
+                        ArrayList<Integer> book_IDs = new ArrayList<>();
+                        if(novelArrayList.size() >0){
+                            for(int i = 0 ; i < novelArrayList.size();i++)
+                                book_IDs.add(novelArrayList.get(i).getId());
+                        }
+
+                        int k;
                         if (response.length() > 5) k = 5;
                         else k = response.length();
-
 
                         for (int i = 0; i < k; i++) {
                             try {
                                 JSONObject object = response.getJSONObject(i);
+                                String name = object.getString("name");
+
+                                int id = object.getInt("id");
+                                if (book_IDs.contains(id)) continue;
+
+                                if (name.length() > 15){
+                                    name = name.substring(0, 15) + "...";
+                                }
+
                                 novelArrayList.add(
-                                        new Novel(object.getInt("id"),
-                                                object.getString("name"),
+                                        new Novel(id,
+                                                name,
                                                 object.getString("description"),
                                                 object.getString("author_name"),
-                                                object.getString("cover"),"0")
+                                                object.getString("cover"),
+                                                object.getString("rating"))
                                 );
+
+//                                Log.d("TAG", "onResponse: " + novelArrayList.get(i).toString());
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -201,5 +247,15 @@ public class MainActivity extends AppCompatActivity {
         }
         cursor.close();
         return path;
+    }
+
+    public void goToActivity(int value){
+        Intent intent = new Intent(MainActivity.this, NovelActivity.class);
+
+        Bundle dataBundle = new Bundle();
+        dataBundle.putInt(key, value);
+        intent.putExtras(dataBundle);
+
+        startActivity(intent);
     }
 }

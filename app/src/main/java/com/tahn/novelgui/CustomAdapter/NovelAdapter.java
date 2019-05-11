@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.tahn.novelgui.DataObject.ChapterSimple;
 import com.tahn.novelgui.DataObject.Novel;
-import com.tahn.novelgui.MainActivity;
 import com.tahn.novelgui.R;
+import com.tahn.novelgui.Volley_config.Volley_Constant;
 
 import java.util.ArrayList;
 
@@ -57,8 +57,12 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(NovelAdapter.MyViewHolder myViewHolder, int i) {
+
         myViewHolder.txtViewName.setText(novelArrayList.get(i).getName());
         myViewHolder.txtRate.setText("Rate: " + novelArrayList.get(i).getRating());
+
+
+        Log.d("avcd", "onBindViewHolder: " + novelArrayList.get(i).getName());
 
 //        Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/1.jpg")
 //                .placeholder(R.mipmap.ic_launcher)
@@ -67,10 +71,12 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
         String[] k = novelArrayList.get(i).getCover().toString().split("\\/");
         String l = k[k.length-1];
 
-        Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/"+l)
+        Picasso.with(context).load(Volley_Constant.Url_Base1 +l)
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.drawable.endgame)
                 .into(myViewHolder.imgNovel);
+
+        Log.d("hihi", "" + l);
 
         //myViewHolder.imgNovel.setImageResource(novelArrayList.get(i).getImg());
     }
