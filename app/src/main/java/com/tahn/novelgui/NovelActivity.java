@@ -34,6 +34,7 @@ public class NovelActivity extends AppCompatActivity {
     TextView txtRating;
     ArrayList<ChapterSimple> chapterSimples = new ArrayList<>();
     static String key = "sendID";
+    static String keySendToCM = "sendCM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,11 @@ public class NovelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NovelActivity.this, CommentActivity.class);
+
+                Bundle dataBundle = new Bundle();
+                dataBundle.putInt(keySendToCM, id);
+                intent.putExtras(dataBundle);
+
                 startActivity(intent);
             }
         });
@@ -75,7 +81,7 @@ public class NovelActivity extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChapterActivity.chapterSimpleArrayList.clear();
+//                ChapterActivity.chapterSimpleArrayList.clear();
                 Intent intent = new Intent(NovelActivity.this, ChapterActivity.class);
 
                 Bundle dataBundle = new Bundle();

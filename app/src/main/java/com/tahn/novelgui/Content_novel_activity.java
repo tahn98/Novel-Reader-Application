@@ -52,7 +52,7 @@ public class Content_novel_activity extends AppCompatActivity {
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Load Ok", "onResponse: " + response.toString());
+                Log.d("Load Ok", "onResponse: " + response);
                 JSONArray jsonArray = null;
                 try{
                     jsonArray = new JSONArray(response);

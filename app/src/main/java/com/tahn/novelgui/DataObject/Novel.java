@@ -7,8 +7,17 @@ public class Novel {
     String author_name;
     String cover; // link image
 
-    String rating;
+    public Novel(int id, String name, String description, String author_name, String cover, String rating, String dateTime) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.author_name = author_name;
+        this.cover = cover;
+        this.rating = rating;
+        this.dateTime = dateTime;
+    }
 
+    String rating;
     String dateTime;
 
     public String getDateTime() {

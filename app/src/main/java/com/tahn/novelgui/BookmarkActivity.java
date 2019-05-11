@@ -11,7 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.tahn.novelgui.CustomAdapter.NovelBookmarkAdapter;
+import com.tahn.novelgui.CustomAdapter.NovelAdapterSimple;
 import com.tahn.novelgui.DataObject.Novel;
 
 import java.util.ArrayList;
@@ -29,10 +29,11 @@ public class BookmarkActivity extends AppCompatActivity {
 
         novelArrayList = new ArrayList<>();
         //novelArrayList.add(new Novel("Avengers", "The End Game with Thanos", "26/04/2019", R.drawable.endgame));
-        novelArrayList.add(new Novel(1,"End Game", "", "5","",""));
+        //int id, String name, String description, String author_name, String cover, String rating, String dateTime
+        novelArrayList.add(new Novel(1, "The End", "", "", "", "5", "12-09-1998"));
         novelListView = findViewById(R.id.lvBookMark);
-        NovelBookmarkAdapter novelBookmarkAdapter = new NovelBookmarkAdapter(BookmarkActivity.this, novelArrayList);
-        novelListView.setAdapter(novelBookmarkAdapter);
+        NovelAdapterSimple novelAdapterSimple = new NovelAdapterSimple(BookmarkActivity.this, novelArrayList);
+        novelListView.setAdapter(novelAdapterSimple);
 
         toolbar = findViewById(R.id.toolbarBookMark);
         setSupportActionBar(toolbar);

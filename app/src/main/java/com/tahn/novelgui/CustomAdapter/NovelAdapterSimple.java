@@ -15,12 +15,12 @@ import com.tahn.novelgui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NovelBookmarkAdapter extends BaseAdapter {
+public class NovelAdapterSimple extends BaseAdapter {
 
     Context context;
     List<Novel> novels;
 
-    public NovelBookmarkAdapter(Context context, List<Novel> novels) {
+    public NovelAdapterSimple(Context context, List<Novel> novels) {
         this.context = context;
         this.novels = novels;
     }
@@ -46,13 +46,13 @@ public class NovelBookmarkAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.listview_main_custom, null);
 
         TextView txtName = convertView.findViewById(R.id.txtNovelName);
-        TextView txtDesc = convertView.findViewById(R.id.txtDesc);
         TextView txtTime = convertView.findViewById(R.id.txtTimeUpdate);
+        TextView txtRate = convertView.findViewById(R.id.txtNovelRate);
         ImageView imgView = convertView.findViewById(R.id.img_picNovel);
 
         txtName.setText(novels.get(position).getName());
-        txtDesc.setText(novels.get(position).getDescription());
         txtTime.setText(novels.get(position).getDateTime());
+        txtRate.setText("Rating: " + novels.get(position).getRating());
         //imgView.setImageResource(novels.get(position).getCover());
 
         // Picasso processing
