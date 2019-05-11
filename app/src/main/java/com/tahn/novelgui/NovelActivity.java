@@ -52,7 +52,7 @@ public class NovelActivity extends AppCompatActivity {
         String rate = MainActivity.novelArrayList.get(pos).getRating();
         String cover = MainActivity.novelArrayList.get(pos).getCover();
 
-        String[] k = cover.toString().split("\\/");
+        String[] k = cover.split("\\/");
         String l = k[k.length-1];
 
         txtName.setText(name);
@@ -75,15 +75,7 @@ public class NovelActivity extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Dialog dialog = new Dialog(NovelActivity.this);
-//                dialog.setContentView(R.layout.chapter_dialog);
-//                dialog.setTitle("Chapter List");
-//                ListView list = dialog.findViewById(R.id.listChapter);
-//                NovelAdapter novelAdapter = new NovelAdapter(NovelActivity.this, chapterSimples);
-//                list.setAdapter((ListAdapter) novelAdapter);
-//                dialog.show();
-
-
+                ChapterActivity.chapterSimpleArrayList.clear();
                 Intent intent = new Intent(NovelActivity.this, ChapterActivity.class);
 
                 Bundle dataBundle = new Bundle();
@@ -93,8 +85,6 @@ public class NovelActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     public void addControls(){

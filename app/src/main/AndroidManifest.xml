@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChapterActivity"></activity>
+        <activity android:name=".Content_novel_activity"></activity>
+        <activity android:name=".ChapterActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CommentActivity" />
         <activity android:name=".SearchActivity" />

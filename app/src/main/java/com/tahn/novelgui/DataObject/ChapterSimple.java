@@ -1,6 +1,24 @@
 package com.tahn.novelgui.DataObject;
 
 public class ChapterSimple {
+    private String chapId;
+
+    public ChapterSimple(String chapId, String nameChap, String bookId, String uploadDate, String numView) {
+        this.chapId = chapId;
+        this.nameChap = nameChap;
+        this.bookId = bookId;
+        this.uploadDate = uploadDate;
+        this.numView = numView;
+    }
+
+    public String getChapId() {
+        return chapId;
+    }
+
+    public void setChapId(String chapId) {
+        this.chapId = chapId;
+    }
+
     private String nameChap;
     private String bookId;
     private String uploadDate;

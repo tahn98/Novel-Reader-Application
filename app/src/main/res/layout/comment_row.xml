@@ -11,7 +11,7 @@
         android:textSize="20sp"
         android:fontFamily="sans-serif-medium"
         android:text="Name"
-        android:id="@+id/txtName"
+        android:id="@+id/txtNameUserComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
