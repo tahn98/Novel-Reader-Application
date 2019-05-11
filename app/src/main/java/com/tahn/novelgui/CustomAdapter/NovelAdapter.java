@@ -60,7 +60,14 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
         myViewHolder.txtViewName.setText(novelArrayList.get(i).getName());
         myViewHolder.txtRate.setText("Rate: " + novelArrayList.get(i).getRating());
 
-        Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/1.jpg")
+//        Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/1.jpg")
+//                .placeholder(R.mipmap.ic_launcher)
+//                .error(R.drawable.endgame)
+//                .into(myViewHolder.imgNovel);
+        String[] k = novelArrayList.get(i).getCover().toString().split("\\/");
+        String l = k[k.length-1];
+
+        Picasso.with(context).load("http://192.168.56.1:8080/sql_server/Image/"+l)
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.drawable.endgame)
                 .into(myViewHolder.imgNovel);

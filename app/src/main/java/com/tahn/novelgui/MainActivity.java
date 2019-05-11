@@ -175,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
                                                 object.getString("author_name"),
                                                 object.getString("cover"),"0")
                                 );
-                                Toast.makeText(MainActivity.this, novelArrayList.get(i).getName(), Toast.LENGTH_LONG).show();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
