@@ -45,6 +45,7 @@ public class CommentActivity extends AppCompatActivity {
     private String date_comment;
     Button btnComment;
     EditText edtComment;
+    String user_name;
 
 
     @Override
@@ -55,6 +56,7 @@ public class CommentActivity extends AppCompatActivity {
         listViewComment = findViewById(R.id.listViewComment);
         btnComment = findViewById(R.id.btnEnterComment);
         edtComment = findViewById(R.id.edtEnterComment);
+        user_name = LoginActivity.user_name_final;
 
         commentAdapter = new CommentAdapter(CommentActivity.this, commentArrayList);
 
@@ -77,10 +79,10 @@ public class CommentActivity extends AppCompatActivity {
 
                 if(comment_content.trim().equals("")) {
                     //final String book_id,final String user_id, final String comment_content,final String date_comment
-                    Toast.makeText(CommentActivity.this, "deo co comment", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(CommentActivity.this, "deo co comment", Toast.LENGTH_LONG).show();
 
                 }else{
-                    InsertCommand(idBook, "1", comment_content, date_comment);
+                    InsertCommand(idBook, user_name, comment_content, date_comment);
                     Toast.makeText(CommentActivity.this, "", Toast.LENGTH_LONG).show();
                 }
 
@@ -133,7 +135,7 @@ public class CommentActivity extends AppCompatActivity {
         RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    public void InsertCommand(final String book_id,final String user_id, final String comment_content,final String date_comment){
+    public void InsertCommand(final String book_id,final String user_name, final String comment_content,final String date_comment){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Volley_Constant.insert_comment_url
                 , new Response.Listener<String>() {
@@ -150,13 +152,9 @@ public class CommentActivity extends AppCompatActivity {
                     for (int i = 0 ; i < jsonArray.length(); i++){
                         JSONObject object = (JSONObject) jsonArray.get(i);
 
-//                        commentArrayList.add(
-//                                //String content, String id, String date_comment, String name_user
-//                                new Comment(object.getString("comment_text"), "-1", object.getString("comment_date"), object.getString("name"))
-//                        );
                         String result = object.getString("error");
                         if (result.equals("false")){
-                            Toast.makeText(CommentActivity.this, "Successfully", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(CommentActivity.this, "Successfully", Toast.LENGTH_LONG).show();
                             GetSomeThing(idBook);
                         }
                         else{
@@ -179,7 +177,7 @@ public class CommentActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("book_id", book_id);
-                params.put("user_id", user_id);
+                params.put("user_name", user_name);
                 params.put("comment_text", comment_content);
                 params.put("comment_date", date_comment);
                 return params;

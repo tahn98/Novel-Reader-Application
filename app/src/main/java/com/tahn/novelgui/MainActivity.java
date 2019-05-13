@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     NovelAdapter novelAdapter;
+    NovelAdapter novelAdapterUpdate;
     NavigationView navigationView;
     private DrawerLayout drawerLayout;
     MultiSnapRecyclerView firstRecyclerView, secondRecycleView;
@@ -50,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
             int position = viewHolder.getAdapterPosition();
             goToActivity(position);
+        }
+    };
+
+
+    private View.OnClickListener getOnItemClickListener_bottom = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+            int position = viewHolder.getAdapterPosition();
+            goToActivity_bottom(position);
         }
     };
 
@@ -89,18 +101,19 @@ public class MainActivity extends AppCompatActivity {
         addRecycleViewController();
 
         GetSomeThing();
+        getUpdatedNovel();
 
-        novelArrayListUpdate.add(new Novel(1,"Sword Art Online", "", "5","",""));
+//        novelArrayListUpdate.add(new Novel(1,"Sword Art Online", "", "5","",""));
 
         novelAdapter = new NovelAdapter(getApplicationContext(), novelArrayList);
-        NovelAdapter novelAdapterUpdate = new NovelAdapter(getApplicationContext(), novelArrayListUpdate);
-        novelAdapter.notifyDataSetChanged();
+        novelAdapterUpdate = new NovelAdapter(getApplicationContext(), novelArrayListUpdate);
+//        novelAdapter.notifyDataSetChanged();
         firstRecyclerView.setAdapter(novelAdapter);
-        novelAdapter.notifyDataSetChanged();
+//        novelAdapter.notifyDataSetChanged();
         //event on recycle view
         secondRecycleView.setAdapter(novelAdapterUpdate);
-
         novelAdapter.setOnItemClickListener(onItemClickListener);
+        novelAdapterUpdate.setOnItemClickListener(getOnItemClickListener_bottom);
 
         /////////////
     }
@@ -153,8 +166,8 @@ public class MainActivity extends AppCompatActivity {
                                 int id = object.getInt("id");
                                 if (book_IDs.contains(id)) continue;
 
-                                if (name.length() > 15){
-                                    name = name.substring(0, 15) + "...";
+                                if (name.length() > 30){
+                                    name = name.substring(0, 30) + "...";
                                 }
 
                                 novelArrayList.add(
@@ -184,13 +197,77 @@ public class MainActivity extends AppCompatActivity {
         RequestHandler.getInstance(this).addToRequestQueue(jsonArrayRequest);
     }
 
+    public void getUpdatedNovel(){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Volley_Constant.new_novel_url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        ArrayList<Integer> book_IDs = new ArrayList<>();
+                        if(novelArrayListUpdate.size() >0 ){
+                            for(int i = 0 ; i < novelArrayListUpdate.size(); i++)
+                                book_IDs.add(novelArrayListUpdate.get(i).getId());
+                        }
+
+                        int k;
+                        if (response.length() > 5) k = 5;
+                        else k = response.length();
+
+                        for (int i = 0; i < k; i++) {
+                            try {
+                                JSONObject object = response.getJSONObject(i);
+                                String name = object.getString("name");
+
+                                int id = object.getInt("id");
+                                if (book_IDs.contains(id)) continue;
+
+                                if (name.length() > 30){
+                                    name = name.substring(0, 30) + "...";
+                                }
+
+                                novelArrayListUpdate.add(
+                                        new Novel(id,
+                                                name,
+                                                object.getString("description"),
+                                                object.getString("author_name"),
+                                                object.getString("cover"),
+                                                object.getString("rating"))
+                                );
+                                novelAdapterUpdate.notifyDataSetChanged();
+
+//                                Log.d("TAG", "onResponse: " + novelArrayList.get(i).toString());
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "FALSE" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+        );
+        RequestHandler.getInstance(this).addToRequestQueue(jsonArrayRequest);
+    }
+
     public void goToActivity(int value){
         Intent intent = new Intent(MainActivity.this, NovelActivity.class);
+        Novel novel = novelArrayList.get(value);
 
-        Bundle dataBundle = new Bundle();
-        dataBundle.putInt(key, value);
-        intent.putExtras(dataBundle);
+//        Bundle dataBundle = new Bundle();
+//        dataBundle.putInt(key, value);
+//        intent.putExtras(dataBundle);
+        intent.putExtra(key, novel);
+        startActivity(intent);
+    }
 
+    public void goToActivity_bottom(int value){
+        Intent intent = new Intent(MainActivity.this, NovelActivity.class);
+        Novel novel = novelArrayListUpdate.get(value);
+        intent.putExtra(key, novel);
         startActivity(intent);
     }
 }

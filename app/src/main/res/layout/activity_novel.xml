@@ -8,22 +8,40 @@
     <FrameLayout
         android:id="@+id/background_top"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/back_ground_novel_top"></FrameLayout>
+        android:layout_height="270dp"
+        android:background="@drawable/back_ground_novel_top">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtFavor"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="220dp"
+                android:layout_marginEnd="62dp"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
 
 
     <ImageView
         android:id="@+id/imgNovel"
         android:layout_centerHorizontal="true"
-        android:layout_width="120dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
         android:src="@drawable/endgame" />
 
     <TextView
         android:id="@+id/txtNovelName"
         android:fontFamily="sans-serif-medium"
         android:textColor="#ffffff"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgNovel"
@@ -40,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtNovelName"
         android:layout_alignTop="@+id/txtNovelName"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:text="Author Name"
         android:textColor="#ffffff" />
 
@@ -49,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/imgNovel"
-        android:layout_marginTop="305dp"
+        android:layout_marginTop="280dp"
         android:orientation="vertical">
 
         <TextView
@@ -139,21 +157,24 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/txtComment"
                 android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/ic_comment_black_24dp"
                 android:text="Comment" />
-            
+
+
+
             <TextView
-                android:drawableTop="@drawable/ic_favorite_black_24dp"
-                android:id="@+id/txtFavor"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/txtRate"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="Favorite"/>
+                android:drawableTop="@drawable/ic_rate_review_black_24dp"
+                android:text="Rate"
+                android:textAlignment="center" />
 
         </LinearLayout>
 

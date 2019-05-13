@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtPass;
     Button btnReg;
     Button btnLog;
+    static public String user_name_final;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject object = (JSONObject) jsonArray.get(i);
                         String result = object.getString("error");
                         if (result.equals("false")){
+                            user_name_final = edtName.getText().toString();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
                         else{

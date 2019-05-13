@@ -1,11 +1,19 @@
 package com.tahn.novelgui.DataObject;
 
-public class Novel {
+import java.io.Serializable;
+
+public class Novel implements Serializable {
     int id;
     String name;
     String description;
     String author_name;
     String cover; // link image
+
+    public Novel(int id, String name, String cover) {
+        this.id = id;
+        this.name = name;
+        this.cover = cover;
+    }
 
     public Novel(int id, String name, String description, String author_name, String cover, String rating, String dateTime) {
         this.id = id;

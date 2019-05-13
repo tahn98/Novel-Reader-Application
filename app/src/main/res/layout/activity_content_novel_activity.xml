@@ -3,13 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Content_novel_activity">
+    tools:context=".Content_novel_activity"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:background="@drawable/back_ground_novel_top"
+        android:gravity="center"
+        android:fontFamily="sans-serif-medium"
+        android:text="READ SCREEN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
             android:id="@+id/txtContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

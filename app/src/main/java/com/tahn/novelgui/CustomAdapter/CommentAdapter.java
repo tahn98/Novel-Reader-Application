@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.tahn.novelgui.DataObject.Comment;
 import com.tahn.novelgui.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class CommentAdapter extends BaseAdapter {

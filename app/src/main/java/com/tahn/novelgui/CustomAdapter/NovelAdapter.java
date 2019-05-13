@@ -73,7 +73,7 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.MyViewHolder
 
         Picasso.with(context).load(Volley_Constant.Url_Base1 +l)
 //                .placeholder(R.mipmap.ic_launcher)
-//                .error(R.drawable.endgame)
+//                .error(R.mipmap.ic_launcher)
                 .into(myViewHolder.imgNovel);
 
         //myViewHolder.imgNovel.setImageResource(novelArrayList.get(i).getImg());

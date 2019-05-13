@@ -48,6 +48,7 @@ public class ChapterActivity extends AppCompatActivity {
         listViewChap = findViewById(R.id.listChapter);
         Bundle extras = getIntent().getExtras();
         int id = extras.getInt("sendID");
+//        Toast.makeText(ChapterActivity.this, String.valueOf(id), Toast.LENGTH_LONG).show();
         getAllChapter(String.valueOf(id));
 
 
@@ -55,9 +56,6 @@ public class ChapterActivity extends AppCompatActivity {
 //        chapterSimpleArrayList.add(new ChapterSimple("Chap.1", 1, "12-04-1998", 1234));
 //        chapterSimpleArrayList.add(new ChapterSimple("Chap.1", 1, "12-04-1998", 1234));
 //        chapterSimpleArrayList.add(new ChapterSimple("Chap.1", 1, "12-04-1998", 1234));
-
-
-        Toast.makeText(getApplicationContext(), id + "", Toast.LENGTH_LONG).show();
 
         chapterAdapter = new ChapterAdapter(ChapterActivity.this, chapterSimpleArrayList);
         listViewChap.setAdapter(chapterAdapter);

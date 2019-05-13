@@ -19,7 +19,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
     </FrameLayout>
 
+    <TextView
+        android:gravity="center"
+        android:background="@drawable/back_ground_novel_top"
+        android:fontFamily="sans-serif-medium"
+        android:text="LIST CHAPTER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ListView
+        android:layout_marginTop="10dp"
         android:id="@+id/lvBookMark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>

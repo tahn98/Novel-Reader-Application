@@ -37,8 +37,6 @@ public class Content_novel_activity extends AppCompatActivity {
         String id_book = extras.getString(key_book);
         String id_chap = extras.getString(key_chap);
 
-        Toast.makeText(Content_novel_activity.this, "" + id_book + " " + id_chap, Toast.LENGTH_LONG).show();
-
         getContentChapter(id_book, id_chap);
 
         txtContent = findViewById(R.id.txtContent);

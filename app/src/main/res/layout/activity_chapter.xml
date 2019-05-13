@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChapterActivity">
 
+    <TextView
+        android:gravity="center"
+        android:background="@drawable/back_ground_novel_top"
+        android:fontFamily="sans-serif-medium"
+        android:text="LIST CHAPTER"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView
+        android:layout_marginTop="10dp"
         android:id="@+id/listChapter"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
