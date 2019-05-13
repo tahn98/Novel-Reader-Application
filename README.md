@@ -16,7 +16,7 @@
 ![Screen2](https://user-images.githubusercontent.com/38346869/57637260-2756e200-75d5-11e9-9b5b-fb6c75e7aac3.PNG)
 
 ### Technology :
-Java / Android Studio 
-PHP / Google Volley 
-MySql
-LocalHost với Xampp
+- Java / Android Studio 
+- PHP / Google Volley 
+- MySql
+- LocalHost với Xampp
