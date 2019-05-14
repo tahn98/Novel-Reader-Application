@@ -62,8 +62,8 @@ public class CommentActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         idBook = String.valueOf(extras.getInt(keySendToCM));
+        Log.d("book_id", "onCreate: " + idBook);
         GetSomeThing(idBook);
-
         listViewComment.setAdapter(commentAdapter);
 
         btnComment.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,6 @@ public class CommentActivity extends AppCompatActivity {
 
                 if(comment_content.trim().equals("")) {
                     //final String book_id,final String user_id, final String comment_content,final String date_comment
-//                    Toast.makeText(CommentActivity.this, "deo co comment", Toast.LENGTH_LONG).show();
 
                 }else{
                     InsertCommand(idBook, user_name, comment_content, date_comment);
@@ -158,7 +157,7 @@ public class CommentActivity extends AppCompatActivity {
                             GetSomeThing(idBook);
                         }
                         else{
-                            Toast.makeText(CommentActivity.this, "Can not comment", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(CommentActivity.this, "Can not comment", Toast.LENGTH_LONG).show();
                         }
                     }
                     commentAdapter.notifyDataSetChanged();

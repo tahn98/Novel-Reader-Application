@@ -59,7 +59,7 @@ public class BookmarkActivity extends AppCompatActivity {
         novelListView = findViewById(R.id.lvBookMark);
         novelAdapterSimple = new NovelAdapterSimple(BookmarkActivity.this, novelArrayList);
 
-        getAllFavortiteBook("abc");
+        getAllFavortiteBook(user_name);
 
         novelListView.setAdapter(novelAdapterSimple);
 

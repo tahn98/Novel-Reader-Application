@@ -44,14 +44,12 @@ public class ChapterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
+        String book_id = getIntent().getStringExtra("key_book_id");
+        getAllChapter(String.valueOf(book_id));
 
         listViewChap = findViewById(R.id.listChapter);
-        Bundle extras = getIntent().getExtras();
-        int id = extras.getInt("sendID");
+
 //        Toast.makeText(ChapterActivity.this, String.valueOf(id), Toast.LENGTH_LONG).show();
-        getAllChapter(String.valueOf(id));
-
-
 //        chapterSimpleArrayList.add(new ChapterSimple("Chap.1", "1", "12-04-1998", "1234"));
 //        chapterSimpleArrayList.add(new ChapterSimple("Chap.1", 1, "12-04-1998", 1234));
 //        chapterSimpleArrayList.add(new ChapterSimple("Chap.1", 1, "12-04-1998", 1234));
@@ -66,13 +64,13 @@ public class ChapterActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String id_chapter = ChapterActivity.chapterSimpleArrayList.get(position).getChapId();
                 String id_book = ChapterActivity.chapterSimpleArrayList.get(position).getBookId();
-
                 goToActivity(position, id_book, id_chapter);
             }
         });
     }
 
     private void getAllChapter(final String id){
+        chapterSimpleArrayList.clear();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Volley_Constant.Url_Base2
                 , new Response.Listener<String>() {
             @Override

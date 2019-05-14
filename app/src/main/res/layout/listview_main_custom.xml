@@ -28,6 +28,19 @@
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:visibility="invisible"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/txtAuthorsp"
+            style="@android:style/TextAppearance.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Author"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

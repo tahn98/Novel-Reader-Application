@@ -60,7 +60,7 @@ public class NovelActivity extends AppCompatActivity {
     public String book_id = "";
     String user_name = "";
     public boolean flag_favor = false;
-    public static String rate = "";
+    public static String rate = "0.0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class NovelActivity extends AppCompatActivity {
                 Intent intent = new Intent(NovelActivity.this, CommentActivity.class);
 
                 Bundle dataBundle = new Bundle();
-                dataBundle.putInt(keySendToCM, id);
+                dataBundle.putInt(keySendToCM, Integer.parseInt(book_id));
                 intent.putExtras(dataBundle);
 
                 startActivity(intent);
@@ -125,10 +125,9 @@ public class NovelActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                ChapterActivity.chapterSimpleArrayList.clear();
                 Intent intent = new Intent(NovelActivity.this, ChapterActivity.class);
-
-                Bundle dataBundle = new Bundle();
-                dataBundle.putInt(key, Integer.parseInt(book_id));
-                intent.putExtras(dataBundle);
+                intent.putExtra("key_book_id", book_id);
+//                dataBundle.putInt(key, Integer.parseInt(book_id));
+//                intent.putExtras(dataBundle);
 
                 startActivity(intent);
             }
@@ -138,7 +137,7 @@ public class NovelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getRatting(user_name, book_id);
-//                ShowDialog(rate);
+                Log.d("rate" , "onClick: " + user_name + book_id);
             }
         });
 
@@ -148,8 +147,6 @@ public class NovelActivity extends AppCompatActivity {
                 changeFavorite(book_id, user_name);
             }
         });
-
-
     }
 
     public void addControls(){
@@ -204,8 +201,6 @@ public class NovelActivity extends AppCompatActivity {
         popDialog.setPositiveButton(android.R.string.ok,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-//                        textView.setText(String.valueOf(rating.getProgress()));
-//                        Toast.makeText(NovelActivity.this, String.valueOf(rating.getProgress()), Toast.LENGTH_LONG).show();
                         num_rate = String.valueOf(rating.getProgress());
                         Toast.makeText(NovelActivity.this, book_id + " " + user_name + " " + num_rate, Toast.LENGTH_LONG).show();
                         if (rate != num_rate) {
@@ -303,7 +298,6 @@ public class NovelActivity extends AppCompatActivity {
                         String result = object.getString("error");
                         if (result.equals("false")){
                             //doi mau hinh anh favor
-//                            Toast.makeText(NovelActivity.this, "doi mau", Toast.LENGTH_LONG).show();
                             flag_favor = !flag_favor;
                             setColorFavorite(flag_favor);
                         }
@@ -363,12 +357,12 @@ public class NovelActivity extends AppCompatActivity {
 //                            Toast.makeText(NovelActivity.this, "Not Rate" + object.getString("rate"), Toast.LENGTH_LONG).show();
                             rate = object.getString("rate");
                             Log.d("abd", "onResponse: " + rate);
-                            ShowDialog(rate);
                         }
                     }
                 } catch (JSONException e) {
 
                 }
+                ShowDialog(rate);
             }
         }, new Response.ErrorListener() {
             @Override

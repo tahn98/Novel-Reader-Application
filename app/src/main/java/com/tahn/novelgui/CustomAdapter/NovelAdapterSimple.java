@@ -24,6 +24,7 @@ public class NovelAdapterSimple extends BaseAdapter implements Filterable {
     Context context;
     List<Novel> novels;
     List<Novel> originData;
+
     private ValueFilter valueFilter;
     private FullFilter fullFill;
 
@@ -54,9 +55,12 @@ public class NovelAdapterSimple extends BaseAdapter implements Filterable {
         convertView = inflater.inflate(R.layout.listview_main_custom, null);
 
         TextView txtName = convertView.findViewById(R.id.txtNovelName);
+        TextView txtAuthor = convertView.findViewById(R.id.txtAuthorsp);
         ImageView imgView = convertView.findViewById(R.id.img_picNovel);
 
+
         txtName.setText(novels.get(position).getName());
+        txtAuthor.setText(novels.get(position).getAuthor_name());
         //imgView.setImageResource(novels.get(position).getCover());
 
         // Picasso processing
@@ -94,6 +98,8 @@ public class NovelAdapterSimple extends BaseAdapter implements Filterable {
                 ArrayList<Novel> filterList = new ArrayList<Novel>();
                 for (int i = 0; i < novels.size(); i++) {
                     if ((novels.get(i).getName().toUpperCase())
+                            .contains(constraint.toString().toUpperCase())
+                    || (novels.get(i).getAuthor_name().toUpperCase())
                             .contains(constraint.toString().toUpperCase())) {
                         Novel novel = new Novel(novels.get(i).getId(),
                                 novels.get(i).getName(),

@@ -55,7 +55,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         mSearchView = findViewById(R.id.searchView1);
         novelAdapterSimple = new NovelAdapterSimple(SearchActivity.this, novelArrayList);
         adapter_temp = novelAdapterSimple;
-        btnReset = findViewById(R.id.btnRset);
         novelListView.setAdapter(novelAdapterSimple);
 
         novelListView.setTextFilterEnabled(true);
@@ -67,20 +66,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 goToActivity(position);
             }
         });
-
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void setupSearch() {
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(true);
-        mSearchView.setQueryHint("Search Here By Novel Name");
+        mSearchView.setQueryHint("Search Here By Name/Author...");
     }
 
     public void GetAllBook(){
